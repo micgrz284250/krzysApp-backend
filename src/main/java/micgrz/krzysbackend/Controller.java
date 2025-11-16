@@ -1,28 +1,32 @@
 package micgrz.krzysbackend;
 
-import org.json.JSONObject;
+import micgrz.krzysbackend.vitals.VitalsService;
+import micgrz.krzysbackend.vitals.Vitals;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class Controller {
 
-    private final Krzys krzys;
-
-    public Controller(Krzys krzys) {
-        this.krzys = krzys;
-    }
+    @Autowired
+    private VitalsService vitalsService;
 
     @GetMapping("/vitals")
-    public JSONObject getVitals() {
-        JSONObject jo = new JSONObject();
-        jo.put("energia", krzys.getEnergia());
-        jo.put("tetno", krzys.getTetno());
-        jo.put("temperatura", krzys.getTemperatura());
-        jo.put("nastroj", krzys.getStringNastroj());
-        System.out.println("działa");
-        return jo;
+    public Vitals getVitals() {
+        return vitalsService.getTopVitals();
+    }
+
+    @GetMapping("/vitals/put/default")
+    public Vitals getAllVitals() {
+        return vitalsService.getTopVitals();
+    }
+
+    @PostMapping("/vitals/put/default")
+    public Vitals putDefaultVitals() {
+        return vitalsService.saveDefaultVitals();
     }
 }
