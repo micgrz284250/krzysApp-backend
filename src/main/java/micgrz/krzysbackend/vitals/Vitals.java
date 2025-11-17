@@ -15,6 +15,6 @@ public class Vitals {
 
     private int energia;
     private int tetno;
-    private int temperatura;
+    private float temperatura;
     private Nastroj nastroj;
 }
