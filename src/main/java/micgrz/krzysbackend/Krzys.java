@@ -2,6 +2,8 @@ package micgrz.krzysbackend;
 
 import micgrz.krzysbackend.vitals.Nastroj;
 import micgrz.krzysbackend.vitals.Vitals;
+import micgrz.krzysbackend.vitals.VitalsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,15 @@ import java.util.concurrent.TimeUnit;
 public class Krzys {
     private final Vitals vitals;
     private final Nastroj[] nastroje;
+    @Autowired
+    private VitalsService vitalsService;
 
     public Krzys() {
-        vitals = new Vitals(1, 100, 60, 36.6f, Nastroj.SZCZESLIWY);
+        vitals = new Vitals();
+        vitals.setEnergia(100);
+        vitals.setTetno(60);
+        vitals.setTemperatura(36.6f);
+        vitals.setNastroj(Nastroj.SZCZESLIWY);
         nastroje = Nastroj.values();
     }
 
@@ -22,7 +30,7 @@ public class Krzys {
         // Krzyś traci od 1 do 10 energii
         vitals.setEnergia(vitals.getEnergia() - ThreadLocalRandom.current().nextInt(1, 11));
         // temperatura waha się między 35 a 39 stopni
-        vitals.setTemperatura(ThreadLocalRandom.current().nextFloat(35, 40));
+        vitals.setTemperatura(Math.round(ThreadLocalRandom.current().nextFloat(3500, 4000)) / 100.0f);
         // tętno jest wyższe niż 60 to spada od 10 do 15
         if (vitals.getTetno() >= 60) vitals.setTetno(vitals.getTetno() - ThreadLocalRandom.current().nextInt(10, 16));
         // przybiera losowy z dostępnych nastrojów
@@ -49,9 +57,19 @@ public class Krzys {
         heartbeatSpike();
     }
 
-    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
     public void simulateVitals() {
         simulate();
+
+        Vitals newVitals = new Vitals();
+        newVitals.setEnergia(vitals.getEnergia());
+        newVitals.setTetno(vitals.getTetno());
+        newVitals.setTemperatura(vitals.getTemperatura());
+        newVitals.setNastroj(vitals.getNastroj());
+
+        vitalsService.saveVitals(newVitals);
+        System.out.println(newVitals);
+
         restore();
     }
 }

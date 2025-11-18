@@ -1,5 +1,7 @@
 package micgrz.krzysbackend;
 
+import micgrz.krzysbackend.message.Message;
+import micgrz.krzysbackend.message.MessageService;
 import micgrz.krzysbackend.vitals.VitalsService;
 import micgrz.krzysbackend.vitals.Vitals;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +16,21 @@ public class Controller {
 
     @Autowired
     private VitalsService vitalsService;
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/vitals")
     public Vitals getVitals() {
         return vitalsService.getTopVitals();
     }
 
-    @GetMapping("/vitals/put/default")
-    public Vitals getAllVitals() {
-        return vitalsService.getTopVitals();
-    }
-
-    @PostMapping("/vitals/put/default")
+    @PostMapping("/vitals/default")
     public Vitals putDefaultVitals() {
         return vitalsService.saveDefaultVitals();
+    }
+
+    @PostMapping("/message")
+    public Message postMessage(String content) {
+        return messageService.saveMessage(content);
     }
 }
