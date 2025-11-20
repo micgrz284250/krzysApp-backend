@@ -5,10 +5,7 @@ import micgrz.krzysbackend.message.MessageService;
 import micgrz.krzysbackend.vitals.VitalsService;
 import micgrz.krzysbackend.vitals.Vitals;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -30,7 +27,7 @@ public class Controller {
     }
 
     @PostMapping("/message")
-    public Message postMessage(String content) {
+    public Message postMessage(@RequestBody String content) {
         return messageService.saveMessage(content);
     }
 }

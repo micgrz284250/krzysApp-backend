@@ -1417,3 +1417,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-19 12:45:21.959664+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]SMESSAGE ELECT * FROM VITALS"; oczekiwano "SAVEPOINT, SCRIPT, SHUTDOWN"
+Syntax error in SQL statement "[*]SMESSAGE ELECT * FROM VITALS"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+SMESSAGE ELECT * FROM VITALS [42001-232]

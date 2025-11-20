@@ -68,7 +68,6 @@ public class Krzys {
         newVitals.setNastroj(vitals.getNastroj());
 
         vitalsService.saveVitals(newVitals);
-        System.out.println(newVitals);
 
         restore();
     }

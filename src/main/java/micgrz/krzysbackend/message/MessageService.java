@@ -11,6 +11,7 @@ public class MessageService {
 
     public Message saveMessage(String content) {
         Message message = new Message(content);
+        System.out.println(message);
         return messageRepository.save(message);
     }
 }
