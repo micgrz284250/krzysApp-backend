@@ -23,8 +23,8 @@ public class VitalsService {
         return vitalsRepository.findFirstByOrderByIdDesc();
     }
 
-    public Vitals saveVitals(Vitals vitals) {
-        return vitalsRepository.save(vitals);
+    public void saveVitals(Vitals vitals) {
+        vitalsRepository.save(vitals);
     }
 
     public Vitals saveDefaultVitals() {

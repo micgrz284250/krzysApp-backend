@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,10 +20,10 @@ public class Message {
     private int id;
 
     private String content;
-    Date date;
+    private LocalDateTime dateTime;
 
     public Message(String content) {
         this.content = content;
-        this.date = new Date();
+        this.dateTime = LocalDateTime.now();
     }
 }

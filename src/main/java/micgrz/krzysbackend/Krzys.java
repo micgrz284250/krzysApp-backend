@@ -29,8 +29,8 @@ public class Krzys {
     private void simulate() {
         // Krzyś traci od 1 do 10 energii
         vitals.setEnergia(vitals.getEnergia() - ThreadLocalRandom.current().nextInt(1, 11));
-        // temperatura waha się między 35 a 39 stopni
-        vitals.setTemperatura(Math.round(ThreadLocalRandom.current().nextFloat(3500, 4000)) / 100.0f);
+        // temperatura waha się między 15 a 39 stopni
+        vitals.setTemperatura(Math.round(ThreadLocalRandom.current().nextFloat(1500, 4000)) / 100.0f);
         // tętno jest wyższe niż 60 to spada od 10 do 15
         if (vitals.getTetno() >= 60) vitals.setTetno(vitals.getTetno() - ThreadLocalRandom.current().nextInt(10, 16));
         // przybiera losowy z dostępnych nastrojów
@@ -57,7 +57,7 @@ public class Krzys {
         heartbeatSpike();
     }
 
-    @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
+    @Scheduled(fixedDelay = 5, timeUnit = TimeUnit.SECONDS)
     public void simulateVitals() {
         simulate();
 
@@ -66,6 +66,8 @@ public class Krzys {
         newVitals.setTetno(vitals.getTetno());
         newVitals.setTemperatura(vitals.getTemperatura());
         newVitals.setNastroj(vitals.getNastroj());
+
+        System.out.println(newVitals);
 
         vitalsService.saveVitals(newVitals);
 
