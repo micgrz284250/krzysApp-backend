@@ -67,7 +67,7 @@ public class Krzys {
         newVitals.setTemperatura(vitals.getTemperatura());
         newVitals.setNastroj(vitals.getNastroj());
 
-        System.out.println(newVitals);
+//        System.out.println(newVitals);
 
         vitalsService.saveVitals(newVitals);
 

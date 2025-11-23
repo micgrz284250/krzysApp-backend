@@ -1,5 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="KrzysBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="DEBUG_MODE" value="true" />
     <module name="krzysBackend.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="micgrz.krzysbackend.KrzysBackendApplication" />
